@@ -176,7 +176,9 @@ def main() -> None:
     first_run = False
 
     # run pandad with all connected serials as arguments
+    # skip the C++ firmware check since pandad.py already handles firmware verification and flashing above
     os.environ['MANAGER_DAEMON'] = 'pandad'
+    os.environ['BOARDD_SKIP_FW_CHECK'] = '1'
     process = subprocess.Popen(["./pandad", *panda_serials], cwd=os.path.join(BASEDIR, "selfdrive/pandad"))
     process.wait()
 
